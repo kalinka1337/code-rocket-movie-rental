@@ -11,21 +11,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.math.BigDecimal;
+
 @Builder
 @Entity
-@Table(name = "users")
-@AllArgsConstructor
+@Table(name = "movies")
+@Data
 @NoArgsConstructor
-public class UserEntity {
-
+@AllArgsConstructor
+public class MovieEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "name")
     private String name;
-    @Column(name = "age")
-    private Integer age;
-    @Column(name = "credits")
-    private Integer credits;
+    @Column(name = "genre")
+    private String genre;
+    @Column(name = "age_restriction")
+    private int ageRestriction;
+    @Column(name = "is_released")
+    private boolean isReleased;
+    @Column(name = "price")
+    private BigDecimal price;
 }

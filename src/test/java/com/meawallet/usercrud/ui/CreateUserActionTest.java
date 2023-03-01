@@ -68,10 +68,7 @@ class CreateUserActionTest {
 
 
     private CreateUserInRequest request() {
-        return new CreateUserInRequest(
-                "Test user",
-                20
-        );
+        return new CreateUserInRequest();
     }
 
     private User user() {

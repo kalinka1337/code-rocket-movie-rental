@@ -18,7 +18,6 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:6.1.7.Final'
     implementation 'org.springframework:spring-orm:6.0.5'
 
-
     implementation 'com.h2database:h2:2.1.214'
 
     compileOnly 'org.projectlombok:lombok:1.18.26'

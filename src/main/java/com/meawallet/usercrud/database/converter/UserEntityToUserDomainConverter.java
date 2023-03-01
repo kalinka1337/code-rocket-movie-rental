@@ -11,6 +11,7 @@ public class UserEntityToUserDomainConverter {
         return User.builder()
                    .age(entity.getAge())
                    .name(entity.getName())
+                    .credits(entity.getCredits())
                    .id(entity.getId())
                    .build();
     }

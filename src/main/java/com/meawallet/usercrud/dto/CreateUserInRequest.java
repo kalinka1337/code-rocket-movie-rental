@@ -7,4 +7,5 @@ public class CreateUserInRequest {
 
     String name;
     Integer age;
+    Integer credits;
 }

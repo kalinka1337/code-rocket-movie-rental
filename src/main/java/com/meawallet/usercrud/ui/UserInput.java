@@ -22,9 +22,11 @@ public class UserInput {
             String name = scanner.nextLine();
             System.out.println("Please enter user age:");
             Integer age = Integer.valueOf(scanner.nextLine());
-            return new CreateUserInRequest(name, age);
+            System.out.println("Please enter user credits:");
+            Integer credits = Integer.valueOf(scanner.nextLine());
+            return new CreateUserInRequest(name, age, credits);
         } catch (NumberFormatException e) {
-            throw new UserValidationException("User age incorrect, message: " + e.getMessage());
+            throw new UserValidationException("User age or credits are incorrect, message: " + e.getMessage());
         }
     }
 

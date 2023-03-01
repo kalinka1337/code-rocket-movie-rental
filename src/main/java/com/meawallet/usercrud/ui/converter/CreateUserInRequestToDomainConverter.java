@@ -11,6 +11,7 @@ public class CreateUserInRequestToDomainConverter {
         return User.builder()
                    .name(request.getName())
                    .age(request.getAge())
+                   .credits(request.getCredits())
                    .build();
     }
 }
