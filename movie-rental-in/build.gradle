@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'com.meawallet'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation project(":movie-rental-core")
+    implementation project(":movie-rental-domain")
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.3'
+    implementation project(path: ':movie-rental-repository')
+
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
