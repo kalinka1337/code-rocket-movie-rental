@@ -50,4 +50,9 @@ public class UserController {
         var user = getUserUseCase.getUser(id);
         return userToGetUserInResponseConverter.convert(user);
     }
+
+//    @GetMapping(value = "/test")
+//    public String test() {
+//        return "Test";
+//    }
 }
