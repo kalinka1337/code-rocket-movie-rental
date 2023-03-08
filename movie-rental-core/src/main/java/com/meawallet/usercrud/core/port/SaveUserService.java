@@ -1,4 +1,4 @@
-package com.meawallet.usercrud.core;
+package com.meawallet.usercrud.core.port;
 
 import com.meawallet.usercrud.core.port.in.SaveUserUseCase;
 import com.meawallet.usercrud.core.port.out.SaveUserPort;

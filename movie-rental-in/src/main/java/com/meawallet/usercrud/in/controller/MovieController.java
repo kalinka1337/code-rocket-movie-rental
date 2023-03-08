@@ -1,10 +1,40 @@
 package com.meawallet.usercrud.in.controller;
+import com.meawallet.usercrud.domain.Movie;
 import org.springframework.web.bind.annotation.GetMapping;
-public class MovieController
-{
+import org.springframework.web.bind.annotation.RestController;
 
-    @GetMapping(value = "/movies")
-    public String test() {
-        return "Movie Test";
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+public class MovieController {
+
+    @GetMapping("/movies")
+    public List<Movie> getMovies() {
+        List<Movie> movies = new ArrayList<>();
+        movies.add(Movie.builder()
+                .name("The Godfather")
+                .genre("Drama")
+                .ageRestriction(18)
+                .released(true)
+                .price(new BigDecimal("9.99"))
+                .build());
+        movies.add(Movie.builder()
+                .name("The Dark Knight")
+                .genre("Action")
+                .ageRestriction(16)
+                .released(true)
+                .price(new BigDecimal("14.99"))
+                .build());
+        movies.add(Movie.builder()
+                .name("Peppa Pig")
+                .genre("Cartoon")
+                .ageRestriction(0)
+                .released(false)
+                .price(new BigDecimal("4.99"))
+                .build());
+        return movies;
     }
 }
+
