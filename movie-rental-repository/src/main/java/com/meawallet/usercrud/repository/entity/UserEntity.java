@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @Entity
@@ -27,5 +29,5 @@ public class UserEntity {
     @Column(name = "age")
     private Integer age;
     @Column(name = "credits")
-    private Integer credits;
+    private BigDecimal credits;
 }

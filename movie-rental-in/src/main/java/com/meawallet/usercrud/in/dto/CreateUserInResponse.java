@@ -1,9 +1,11 @@
 package com.meawallet.usercrud.in.dto;
 
+import java.math.BigDecimal;
+
 public record CreateUserInResponse(
         Integer id,
         String name,
         Integer age,
-        Integer credits
+        BigDecimal credits
 ) {
 }
