@@ -25,7 +25,7 @@ public class UserHibernateRepository implements UserRepository {
     public User save(User user) {
         var entity = domainToUserEntityConverter.convert(user);
         sessionFactory.getCurrentSession().persist(entity);
-        return user;
+        return userEntityToUserDomainConverter.convert(entity);
     }
 
     @Override

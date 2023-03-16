@@ -51,12 +51,12 @@ public class MovieRepositoryHibernate implements MovieRepository {
     @Override
     public void update(Movie movie) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(movie);
+        session.merge(movie);
     }
 
     @Override
     public void delete(Movie movie) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(movie);
+        session.remove(movie);
     }
 }
