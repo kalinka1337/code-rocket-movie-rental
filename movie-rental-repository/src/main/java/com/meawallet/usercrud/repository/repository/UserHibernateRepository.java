@@ -10,7 +10,9 @@ import lombok.AllArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @Transactional
@@ -34,4 +36,23 @@ public class UserHibernateRepository implements UserRepository {
         return Optional.ofNullable(entity)
                        .map(userEntityToUserDomainConverter::convert);
     }
+
+    @Override
+    public List<User> findAllUsers() {
+        var session = sessionFactory.getCurrentSession();
+        var criteriaBuilder = session.getCriteriaBuilder();
+        var criteriaQuery = criteriaBuilder.createQuery(UserEntity.class);
+        var root = criteriaQuery.from(UserEntity.class);
+        criteriaQuery.select(root);
+        var query = session.createQuery(criteriaQuery);
+        var userEntities = query.getResultList();
+        return userEntities.stream()
+                .map(userEntityToUserDomainConverter::convert)
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
 }
