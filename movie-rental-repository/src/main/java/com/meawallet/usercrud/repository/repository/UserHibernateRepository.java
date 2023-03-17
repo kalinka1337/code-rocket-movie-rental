@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,8 +52,20 @@ public class UserHibernateRepository implements UserRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void updateCredits(Integer userId, BigDecimal credits) {
+        var session = sessionFactory.getCurrentSession();
+        var userEntity = session.find(UserEntity.class, userId);
+        if (userEntity != null) {
+            userEntity.setCredits(credits);
+        }
+    }
 
-
+    @Override
+    public void updateUser(User user) {
+        var entity = domainToUserEntityConverter.convert(user);
+        sessionFactory.getCurrentSession().merge(entity);
+    }
 
 
 }

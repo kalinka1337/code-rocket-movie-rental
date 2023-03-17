@@ -14,6 +14,7 @@ public class MovieController {
     public List<Movie> getMovies() {
         List<Movie> movies = new ArrayList<>();
         movies.add(Movie.builder()
+                .id(1)
                 .name("The Godfather")
                 .genre("Drama")
                 .ageRestriction(18)
@@ -21,6 +22,7 @@ public class MovieController {
                 .price(new BigDecimal("9.99"))
                 .build());
         movies.add(Movie.builder()
+                .id(2)
                 .name("The Dark Knight")
                 .genre("Action")
                 .ageRestriction(16)
@@ -28,6 +30,7 @@ public class MovieController {
                 .price(new BigDecimal("14.99"))
                 .build());
         movies.add(Movie.builder()
+                .id(3)
                 .name("Peppa Pig")
                 .genre("Cartoon")
                 .ageRestriction(0)

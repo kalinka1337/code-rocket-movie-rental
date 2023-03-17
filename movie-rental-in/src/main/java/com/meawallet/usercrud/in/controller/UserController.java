@@ -3,6 +3,7 @@ package com.meawallet.usercrud.in.controller;
 
 import com.meawallet.usercrud.core.port.in.GetAllUsersUseCase;
 import com.meawallet.usercrud.core.port.in.GetUserUseCase;
+import com.meawallet.usercrud.core.port.in.PurchaseMovieUseCase;
 import com.meawallet.usercrud.core.port.in.SaveUserUseCase;
 import com.meawallet.usercrud.domain.Movie;
 import com.meawallet.usercrud.domain.User;
@@ -34,6 +35,7 @@ public class UserController {
     private final SaveUserUseCase saveUserUseCase;
     private final GetUserUseCase getUserUseCase;
     private final GetAllUsersUseCase getAllUsersUseCase;
+    private final PurchaseMovieUseCase purchaseMovieUseCase;
     private final CreateUserInRequestToDomainConverter createUserInRequestToDomainConverter;
     private final UserToGetUserInResponseConverter userToGetUserInResponseConverter;
     private final UserToCreateUserInResponseConverter userToCreateUserInResponseConverter;
@@ -99,6 +101,36 @@ public class UserController {
         saveUserUseCase.saveUser(user);
 
         return ResponseEntity.ok("Movie bought successfully");
+    }
+
+    @PostMapping("/users/{userId}/movies/{movieId}")
+    public ResponseEntity<Void> purchaseMovie(@PathVariable Integer userId, @PathVariable Integer movieId) {
+        User user = getUserUseCase.getUser(userId);
+        Optional<Movie> optionalMovie = getMovies().stream().filter(movie -> movie.getId().equals(movieId)).findFirst();
+
+        if (!optionalMovie.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Movie movie = optionalMovie.get();
+
+        if (!movie.isReleased()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (movie.getAgeRestriction() > user.getAge()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        if (user.getCredits().compareTo(movie.getPrice()) < 0) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        user.deductCredits(movie.getPrice());
+        user.addMovie(movie);
+        saveUserUseCase.saveUser(user);
+
+        return ResponseEntity.ok().build();
     }
 
 }
